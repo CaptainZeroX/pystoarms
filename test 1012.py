@@ -26,14 +26,17 @@ background = pygame.image.load('mat.png')                # this one is to choose
 
 playerimg = pygame.image.load('Midnight.png').convert_alpha()         # image of the robot
 
-# Keyboard control
 
+# Fills the empty spaces of image with balck (optional remove)
 screen.fill((0, 0, 0))
-
+# Keyboard control
 keys = [False, False, False, False]
+# this used to limit how many times u can put Midnight png at a position
 position_array = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+# this used to limit how many angles that can be used 
 angle_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 a = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+# this used to limit the distance that can be used 
 Distance = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 lcount = 0
 conut_draw = 0
@@ -54,7 +57,8 @@ while running:
     screen.blit(background, (0, 0))
     pygame.display.update()                                 # this is to apply any changes or updates that occur to code
 
-    for event in pygame.event.get():
+     #condition for every button touchdown each with its own event
+    for event in pygame.event.get():                       
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -62,7 +66,7 @@ while running:
         elif event.type == pygame.MOUSEBUTTONUP:
             z = 0
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_KP_ENTER:
+            if event.key == pygame.K_KP_ENTER:                  #on enter this applies the mathmatical formula to draw a line
                 while check != [0, 0]:
                     M = math.tan(angle_array[conut_draw])
                     c = position_array[conut_draw][1] - M * position_array[conut_draw][0]
@@ -171,7 +175,7 @@ while running:
                             a[count] = angle360
                             count += 1
 
-                    if event.type == pygame.KEYUP:
+                    if event.type == pygame.KEYUP:                  #key down conditions
                         if event.key == pygame.K_UP:
                             keys[0] = False
                         elif event.key == pygame.K_LEFT:
