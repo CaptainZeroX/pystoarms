@@ -1,5 +1,5 @@
-import pygame
-import math
+import pygame                   #import pygame so we could use game engine lang
+import math                     #import math so we could use mathematical formulas
 
 
 fileName = 'fll.rtf'               # variable fileName
@@ -11,12 +11,12 @@ def cmpx(inp):                      # define function cmpx (inp)
     return output
 
 
-                      # this is to define the function count to use it later .
+# this is to define the function count to use it later .
 count = 0
 
 
-quit = 0
-pygame.init()
+quit = 0                #set a variable to quit 
+pygame.init()           #start pygame
 test = 0
 screen = pygame.display.set_mode((1222, 693))            # so this line is to write the size of the output window
 background = pygame.image.load('mat.png')                # this one is to choose the background picture
@@ -27,13 +27,13 @@ background = pygame.image.load('mat.png')                # this one is to choose
 playerimg = pygame.image.load('Midnight.png').convert_alpha()         # image of the robot
 
 # Keyboard control
-
-screen.fill((0, 0, 0))
-
 keys = [False, False, False, False]
+#array to input values from where the robot position is (we can only input only 10 robots)
 position_array = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+#array to input values of the angles for each robot turn
 angle_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 a = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+#number of arrays where distance traveled inputed and so can be used in mindestorms
 Distance = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 lcount = 0
 conut_draw = 0
@@ -54,13 +54,15 @@ while running:
     screen.blit(background, (0, 0))
     pygame.display.update()                                 # this is to apply any changes or updates that occur to code
 
-    for event in pygame.event.get():
+    for event in pygame.event.get():                       
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
+        # to apply condition on each mouse button click
+        elif event.type == pygame.MOUSEBUTTONDOWN:          
             z = 1
         elif event.type == pygame.MOUSEBUTTONUP:
             z = 0
+        #when enter is pressed the mathemtical formula is set up and draw a line
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_KP_ENTER:
                 while check != [0, 0]:
@@ -92,7 +94,7 @@ while running:
 
 
 
-            if event.key == pygame.K_d:                       # loop for the fll.rtf file
+            if event.key == pygame.K_d:                       # loop for the fll.rtf file to set up the values used in robot movement 
                 if event.key == pygame.K_d:
                     correction = 0
                     while Distance[counter] != 0:
@@ -129,7 +131,7 @@ while running:
 
                 myfile.close()
 
-        if z == 1:
+        if z == 1:   #<==== this indicates that mouse button down (refrence 60-61)
             # rotate only when Mouse button Down
             while z == 1 or quit == 0:
 
@@ -146,7 +148,8 @@ while running:
                 pygame.display.set_caption(angle360_string)
                 # check if the mouse button is up
                 for event in pygame.event.get():
-                    if event.type == pygame.MOUSEBUTTONUP:
+                    # if mouse button is up the you are able to move robot using the arrow keys 
+                    if event.type == pygame.MOUSEBUTTONUP:              
                         z = 0
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_UP:
@@ -170,7 +173,7 @@ while running:
                             angle_array[count] = angle
                             a[count] = angle360
                             count += 1
-
+                #position correcter to nearest  0.3 if the key arrows are used
                     if event.type == pygame.KEYUP:
                         if event.key == pygame.K_UP:
                             keys[0] = False
